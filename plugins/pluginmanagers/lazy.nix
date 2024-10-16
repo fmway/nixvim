@@ -46,6 +46,11 @@ in
         "lazy-nvim"
       ] { };
 
+      opts = lib.mkOption {
+        type = lib.types.attrs;
+        default = {};
+      };
+
       gitPackage = lib.mkPackageOption pkgs "git" {
         nullable = true;
       };
@@ -210,18 +215,17 @@ in
         plugins = pluginListToLua cfg.plugins;
 
         packedPlugins = if length plugins == 1 then head plugins else plugins;
+        result = {
+          dev = {
+            path = "${lazyPath}";
+            patterns = ["."];
+            fallback = false;
+          };
+          spec = packedPlugins;
+        } // cfg.opts;
       in
       mkIf (cfg.plugins != [ ]) ''
-        require('lazy').setup(
-          {
-            dev = {
-              path = "${lazyPath}",
-              patterns = {"."},
-              fallback = false
-            },
-            spec = ${helpers.toLuaObject packedPlugins}
-          }
-        )
+        require('lazy').setup(${helpers.toLuaObject result})
       '';
   };
 }
