@@ -160,6 +160,7 @@
     "tsp_server"
     "turbo_ls"
     "turtle_ls"
+    "ty"
     # typst-lsp has been removed from nixpkgs as the project is archived
     "typst_lsp"
     "tvm_ffi_navigator"
@@ -404,6 +405,7 @@
     ts_ls = "typescript-language-server";
     ts_query_ls = "ts_query_ls";
     ttags = "ttags";
+    ty = "ty";
     typeprof = "ruby";
     typos_lsp = "typos-lsp";
     uiua = "uiua";

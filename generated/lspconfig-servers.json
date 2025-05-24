@@ -1691,6 +1691,11 @@
     "name": "twiggy_language_server"
   },
   {
+    "cmd": [ "ty", "server" ],
+    "desc": "https://github.com/astral-sh/ty\nA Language Server Protocol implementation for ty, an extremely fast Python type checker and language server, written in Rust.\nFor installation instructions, please refer to the [ty documentation](https://github.com/astral-sh/ty/blob/main/README.md#getting-started).",
+    "name": "ty"
+  },
+  {
     "cmd": ["typeprof", "--lsp", "--stdio"],
     "desc": "https://github.com/ruby/typeprof\n\n`typeprof` is the built-in analysis and LSP tool for Ruby 3.1+.\n    ",
     "name": "typeprof"
