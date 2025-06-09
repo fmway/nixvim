@@ -10,6 +10,7 @@ let
   inherit (lib) optional optionalAttrs;
   builders = lib.nixvim.builders.withPkgs pkgs;
   inherit (pkgs.stdenv.hostPlatform) system;
+  inherit (lib.nixvim) toLuaObject;
 in
 {
   options = {
@@ -229,8 +230,17 @@ in
           initSource;
 
       extraWrapperArgs = builtins.concatStringsSep " " (
+        (optional (config.globals != { })
+          "--add-flags -c --add-flags ${
+            lib.escapeShellArg (
+              builtins.concatStringsSep ";" (
+                lib.mapAttrsToList (k: v: "vim.g.${k}=${toLuaObject v}") config.globals
+              )
+            )
+          }"
+        )
         # Setting environment variables in the wrapper
-        (lib.mapAttrsToList (
+        ++ (lib.mapAttrsToList (
           name: value:
           lib.escapeShellArgs [
             "--set"

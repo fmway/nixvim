@@ -80,7 +80,7 @@ in
               end
               -- }}}
             ''
-          ) optionsAttrs
+          ) (removeAttrs optionsAttrs [ "globals" ])
         );
       in
       lib.mkIf (content != "") (lib.mkOrder 600 content); # Move options to top of file below global table
